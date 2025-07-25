@@ -12,6 +12,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Du_An_Mau">
         <activity
+            android:name=".Screen.QuanLyNhanVienActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.QuanLyDanhMucActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.QuanLyHoaDonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.QuanLyKhachHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.QuanLySanPhamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ThongKeKhachHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ThongKeSanPhamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.ThongKeDoanhThuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screen.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screen.LoginActivity"
             android:exported="false" />
         <activity

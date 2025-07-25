@@ -1,14 +1,18 @@
 package ngovanmanh.ph59521.du_an_mau.Model;
 
-public class HoaDon {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class HoaDon implements Parcelable {
     private String maHoaDon;
     private String maNhanVien;
     private String maKhachHang;
     private String ngayLap;
-    private double tongTien;
-    public HoaDon() {
-    }
-    public HoaDon(String maHoaDon, String maNhanVien, String maKhachHang, String ngayLap, double tongTien) {
+    private int tongTien;
+
+    public HoaDon() {}
+
+    public HoaDon(String maHoaDon, String maNhanVien, String maKhachHang, String ngayLap, int tongTien) {
         this.maHoaDon = maHoaDon;
         this.maNhanVien = maNhanVien;
         this.maKhachHang = maKhachHang;
@@ -16,6 +20,39 @@ public class HoaDon {
         this.tongTien = tongTien;
     }
 
+    protected HoaDon(Parcel in) {
+        maHoaDon = in.readString();
+        maNhanVien = in.readString();
+        maKhachHang = in.readString();
+        ngayLap = in.readString();
+        tongTien = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(maHoaDon);
+        dest.writeString(maNhanVien);
+        dest.writeString(maKhachHang);
+        dest.writeString(ngayLap);
+        dest.writeInt(tongTien);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<HoaDon> CREATOR = new Creator<HoaDon>() {
+        @Override
+        public HoaDon createFromParcel(Parcel in) {
+            return new HoaDon(in);
+        }
+
+        @Override
+        public HoaDon[] newArray(int size) {
+            return new HoaDon[size];
+        }
+    };
 
     public String getMaHoaDon() {
         return maHoaDon;
@@ -25,7 +62,6 @@ public class HoaDon {
         this.maHoaDon = maHoaDon;
     }
 
-
     public String getMaNhanVien() {
         return maNhanVien;
     }
@@ -33,7 +69,6 @@ public class HoaDon {
     public void setMaNhanVien(String maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
-
 
     public String getMaKhachHang() {
         return maKhachHang;
@@ -43,7 +78,6 @@ public class HoaDon {
         this.maKhachHang = maKhachHang;
     }
 
-
     public String getNgayLap() {
         return ngayLap;
     }
@@ -52,12 +86,16 @@ public class HoaDon {
         this.ngayLap = ngayLap;
     }
 
-
-    public double getTongTien() {
+    public int getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(double tongTien) {
+    public void setTongTien(int tongTien) {
         this.tongTien = tongTien;
+    }
+
+    @Override
+    public String toString() {
+        return maHoaDon + " - " + ngayLap;
     }
 }
