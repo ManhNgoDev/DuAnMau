@@ -1,26 +1,88 @@
 package ngovanmanh.ph59521.du_an_mau.Screen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+import java.util.Objects;
+
+import ngovanmanh.ph59521.du_an_mau.Adapter.KhachHangAdapter;
+import ngovanmanh.ph59521.du_an_mau.Database.DatabaseHelper;
+import ngovanmanh.ph59521.du_an_mau.Model.KhachHang;
 import ngovanmanh.ph59521.du_an_mau.R;
 
-public class QuanLyKhachHangActivity extends AppCompatActivity {
+public class QuanLyKhachHangActivity extends AppCompatActivity implements KhachHangAdapter.OnKhachHangClickListener {
+    public static final String KHACH_HANG = "KHACH_HANG";
+    private KhachHangAdapter khachHangAdapter;
+    private List<KhachHang> danhSachKhachHang;
+    private DatabaseHelper db;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_quan_ly_khach_hang);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ListView lvKhachHang = findViewById(R.id.lvKhachHang);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Quản lý khách hàng");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        db = new DatabaseHelper(this);
+        FloatingActionButton fabThemKhachHang = findViewById(R.id.fabThemKhachHang);
+
+        danhSachKhachHang = db.layTatCaKhachHang();
+        khachHangAdapter = new KhachHangAdapter(this, danhSachKhachHang);
+        khachHangAdapter.setOnKhachHangClickListener(this);
+        lvKhachHang.setAdapter(khachHangAdapter);
+
+        fabThemKhachHang.setOnClickListener(view -> {
+            Intent intent = new Intent(this, EditKhachHangActivity.class);
+            intent.putExtra("Type", 1);
+            this.startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        danhSachKhachHang.clear();
+        danhSachKhachHang.addAll(db.layTatCaKhachHang());
+        khachHangAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEditKhachHang(KhachHang khachHang) {
+        Intent intent = new Intent(this, EditKhachHangActivity.class);
+        intent.putExtra("Type", 0);
+        intent.putExtra(KHACH_HANG, khachHang);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteKhachHang(KhachHang khachHang) {
+        DatabaseHelper db = new DatabaseHelper(this);
+        boolean isDeleted = db.xoaKhachHang(khachHang.getMaKhachHang());
+        if (isDeleted) {
+            danhSachKhachHang.remove(khachHang);
+            khachHangAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Xoá khách hàng thành công", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Xoá khách hàng thất bại", Toast.LENGTH_SHORT).show();
+        }
     }
 }

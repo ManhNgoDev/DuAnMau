@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ngovanmanh.ph59521.du_an_mau.Database.DbHelper;
+import ngovanmanh.ph59521.du_an_mau.Database.DatabaseHelper;
 import ngovanmanh.ph59521.du_an_mau.Model.DanhMuc;
 import ngovanmanh.ph59521.du_an_mau.Model.HoaDon;
 import ngovanmanh.ph59521.du_an_mau.Model.HoaDonChiTiet;
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtUsername, edtPassword;
     private CheckBox chkRemember;
     private SharedPreferences sharedPreferences;
-    private DbHelper db;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         chkRemember = findViewById(R.id.chkRemember);
         Button btnLogin = findViewById(R.id.btnLogin);
 
-        db = new DbHelper(this);
+        db = new DatabaseHelper(this);
         SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
         boolean isInit = prefs.getBoolean("init", false);
         if (!isInit) {
@@ -89,26 +89,26 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void taoDuLieuSanPham() {
-        db.themSanPham(new SanPham("SP001", "Nước ngọt Calpis", 12000, 50, "Lon", "2024-02-08", "DM01"));
-        db.themSanPham(new SanPham("SP002", "Trà xanh Ito En", 10000, 40, "Lon", "2024-02-08", "DM01"));
-        db.themSanPham(new SanPham("SP003", "Bánh Pocky", 25000, 30, "Hộp", "2024-02-07", "DM02"));
-        db.themSanPham(new SanPham("SP004", "Sữa Meiji", 15000, 20, "Hộp", "2024-02-06", "DM03"));
-        db.themSanPham(new SanPham("SP005", "Mì Udon", 5000, 100, "Gói", "2024-02-05", "DM04"));
-        db.themSanPham(new SanPham("SP006", "Nước khoáng Suntory", 8000, 60, "Chai", "2024-02-04", "DM01"));
-        db.themSanPham(new SanPham("SP007", "Snack Jagabee", 12000, 45, "Gói", "2024-02-08", "DM05"));
-        db.themSanPham(new SanPham("SP008", "Trà gạo lứt Genmaicha", 30000, 25, "Hộp", "2024-02-08", "DM06"));
-        db.themSanPham(new SanPham("SP009", "Dầu ăn Ajinomoto", 45000, 15, "Chai", "2024-02-03", "DM07"));
-        db.themSanPham(new SanPham("SP010", "Đường nâu Okinawa", 20000, 50, "Bao", "2024-02-02", "DM08"));
-        db.themSanPham(new SanPham("SP011", "Nước tương Kikkoman", 15000, 40, "Chai", "2024-02-09", "DM09"));
-        db.themSanPham(new SanPham("SP012", "Bánh mochi Nhật Bản", 32000, 35, "Hộp", "2024-02-10", "DM02"));
-        db.themSanPham(new SanPham("SP013", "Bia Asahi", 45000, 25, "Lon", "2024-02-11", "DM10"));
-        db.themSanPham(new SanPham("SP014", "Dầu gội Tsubaki", 90000, 20, "Chai", "2024-02-12", "DM11"));
-        db.themSanPham(new SanPham("SP015", "Sữa tươi Morinaga", 12000, 30, "Hộp", "2024-02-13", "DM03"));
-        db.themSanPham(new SanPham("SP016", "Mì Ramen", 4000, 150, "Gói", "2024-02-14", "DM04"));
-        db.themSanPham(new SanPham("SP017", "Bột giặt Attack", 125000, 20, "Bao", "2024-02-15", "DM12"));
-        db.themSanPham(new SanPham("SP018", "Dưa lưới Nhật", 18000, 50, "Kg", "2024-02-16", "DM13"));
-        db.themSanPham(new SanPham("SP019", "Táo Aomori", 50000, 40, "Kg", "2024-02-17", "DM13"));
-        db.themSanPham(new SanPham("SP020", "Rau cải Mizuna", 25000, 60, "Kg", "2024-02-18", "DM14"));
+        db.themSanPham(new SanPham("SP001", "Nước ngọt Calpis", 12000, 50, "Lon", "2024-02-08", "DM001"));
+        db.themSanPham(new SanPham("SP002", "Trà xanh Ito En", 10000, 40, "Lon", "2024-02-08", "DM001"));
+        db.themSanPham(new SanPham("SP003", "Bánh Pocky", 25000, 30, "Hộp", "2024-02-07", "DM002"));
+        db.themSanPham(new SanPham("SP004", "Sữa Meiji", 15000, 20, "Hộp", "2024-02-06", "DM003"));
+        db.themSanPham(new SanPham("SP005", "Mì Udon", 5000, 100, "Gói", "2024-02-05", "DM004"));
+        db.themSanPham(new SanPham("SP006", "Nước khoáng Suntory", 8000, 60, "Chai", "2024-02-04", "DM001"));
+        db.themSanPham(new SanPham("SP007", "Snack Jagabee", 12000, 45, "Gói", "2024-02-08", "DM005"));
+        db.themSanPham(new SanPham("SP008", "Trà gạo lứt Genmaicha", 30000, 25, "Hộp", "2024-02-08", "DM006"));
+        db.themSanPham(new SanPham("SP009", "Dầu ăn Ajinomoto", 45000, 15, "Chai", "2024-02-03", "DM007"));
+        db.themSanPham(new SanPham("SP010", "Đường nâu Okinawa", 20000, 50, "Bao", "2024-02-02", "DM008"));
+        db.themSanPham(new SanPham("SP011", "Nước tương Kikkoman", 15000, 40, "Chai", "2024-02-09", "DM009"));
+        db.themSanPham(new SanPham("SP012", "Bánh mochi Nhật Bản", 32000, 35, "Hộp", "2024-02-10", "DM002"));
+        db.themSanPham(new SanPham("SP013", "Bia Asahi", 45000, 25, "Lon", "2024-02-11", "DM010"));
+        db.themSanPham(new SanPham("SP014", "Dầu gội Tsubaki", 90000, 20, "Chai", "2024-02-12", "DM013"));
+        db.themSanPham(new SanPham("SP015", "Sữa tươi Morinaga", 12000, 30, "Hộp", "2024-02-13", "DM003"));
+        db.themSanPham(new SanPham("SP016", "Mì Ramen", 4000, 150, "Gói", "2024-02-14", "DM004"));
+        db.themSanPham(new SanPham("SP017", "Bột giặt Attack", 125000, 20, "Bao", "2024-02-15", "DM014"));
+        db.themSanPham(new SanPham("SP018", "Dưa lưới Nhật", 18000, 50, "Kg", "2024-02-16", "DM008"));
+        db.themSanPham(new SanPham("SP019", "Táo Aomori", 50000, 40, "Kg", "2024-02-17", "DM008"));
+        db.themSanPham(new SanPham("SP020", "Rau cải Mizuna", 25000, 60, "Kg", "2024-02-18", "DM008"));
     }
 
     private void taoDuLieuKhachHang() {

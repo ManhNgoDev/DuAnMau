@@ -10,13 +10,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import ngovanmanh.ph59521.du_an_mau.Database.DbHelper;
+import ngovanmanh.ph59521.du_an_mau.Database.DatabaseHelper;
 import ngovanmanh.ph59521.du_an_mau.R;
 
 public class UpdatePasswordActivity extends AppCompatActivity {
     private EditText edtOldPassword, edtNewPassword, edtConfirmPassword;
     private Button btnLuu, btnHuy;
-    private DbHelper dbHelper;
+    private DatabaseHelper dbHelper;
     private String maNhanVien;
 
     @Override
@@ -34,7 +34,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         edtConfirmPassword = findViewById(R.id.edtConfirmPassword);
         btnLuu = findViewById(R.id.btnLuu);
         btnHuy = findViewById(R.id.btnHuy);
-        dbHelper = new DbHelper(this);
+        dbHelper = new DatabaseHelper(this);
 
         // Lấy mã nhân viên từ SharedPreferences hoặc Intent
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);

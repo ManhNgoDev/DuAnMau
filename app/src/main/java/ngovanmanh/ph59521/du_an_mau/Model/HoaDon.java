@@ -9,6 +9,8 @@ public class HoaDon implements Parcelable {
     private String maKhachHang;
     private String ngayLap;
     private int tongTien;
+    private String tenKhachHang;
+    private String tenNhanVien;
 
     public HoaDon() {}
 
@@ -92,6 +94,19 @@ public class HoaDon implements Parcelable {
 
     public void setTongTien(int tongTien) {
         this.tongTien = tongTien;
+    }
+
+    public String getTenKhachHang() {
+        return tenKhachHang;
+    }
+    public void setTenKhachHang(String tenKhachHang) {
+        this.tenKhachHang = tenKhachHang;
+    }
+    public String getTenNhanVien() {
+        return tenNhanVien;
+    }
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
     @Override

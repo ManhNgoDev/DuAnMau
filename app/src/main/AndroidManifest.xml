@@ -11,48 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Du_An_Mau">
-        <activity
-            android:name=".Screen.QuanLyNhanVienActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.QuanLyDanhMucActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.QuanLyHoaDonActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.QuanLyKhachHangActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.QuanLySanPhamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.ThongKeKhachHangActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.ThongKeSanPhamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.ThongKeDoanhThuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.UpdatePasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Screen.SplashActivity"
-            android:exported="true">
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.HoaDonChiTietActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.QuanLyNhanVienActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.QuanLyDanhMucActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.QuanLyHoaDonActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.QuanLyKhachHangActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.QuanLySanPhamActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.ThongKeKhachHangActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.ThongKeSanPhamActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.ThongKeDoanhThuActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.UpdatePasswordActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.MainActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.LoginActivity" android:exported="false" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.EditSanPhamActivity" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.EditKhachHangActivity" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.EditDanhMucActivity" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.EditNhanVienActivity" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.GioHangActivity" />
+        <activity android:name="ngovanmanh.ph59521.du_an_mau.Screen.HDCTActivity" />
     </application>
 
 </manifest>

@@ -1,26 +1,88 @@
 package ngovanmanh.ph59521.du_an_mau.Screen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+import java.util.Objects;
+
+import ngovanmanh.ph59521.du_an_mau.Adapter.DanhMucAdapter;
+import ngovanmanh.ph59521.du_an_mau.Database.DatabaseHelper;
+import ngovanmanh.ph59521.du_an_mau.Model.DanhMuc;
 import ngovanmanh.ph59521.du_an_mau.R;
 
-public class QuanLyDanhMucActivity extends AppCompatActivity {
+public class QuanLyDanhMucActivity extends AppCompatActivity implements DanhMucAdapter.OnDanhMucClickListener {
+    public static final String DANH_MUC = "DANH_MUC";
+    private DanhMucAdapter danhMucAdapter;
+    private List<DanhMuc> danhSachDanhMuc;
+    private DatabaseHelper db;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_quan_ly_danh_muc);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ListView lvDanhMuc = findViewById(R.id.lvSanPham);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Quản lý danh mục");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        db = new DatabaseHelper(this);
+        FloatingActionButton fabThemDanhMuc = findViewById(R.id.fabThemDanhMuc);
+
+        danhSachDanhMuc = db.layTatCaDanhMuc();
+        danhMucAdapter = new DanhMucAdapter(this, danhSachDanhMuc);
+        danhMucAdapter.setOnDanhMucClickListener(this);
+        lvDanhMuc.setAdapter(danhMucAdapter);
+
+        fabThemDanhMuc.setOnClickListener(view -> {
+            Intent intent = new Intent(this, EditDanhMucActivity.class);
+            intent.putExtra("Type", 1);
+            this.startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        danhSachDanhMuc.clear();
+        danhSachDanhMuc.addAll(db.layTatCaDanhMuc());
+        danhMucAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEditDanhMuc(DanhMuc danhMuc) {
+        Intent intent = new Intent(this, EditDanhMucActivity.class);
+        intent.putExtra("Type", 0);
+        intent.putExtra(DANH_MUC, danhMuc);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteDanhMuc(DanhMuc danhMuc) {
+        DatabaseHelper db = new DatabaseHelper(this);
+        boolean isDeleted = db.xoaDanhMuc(danhMuc.getMaDanhMuc());
+        if (isDeleted) {
+            danhSachDanhMuc.remove(danhMuc);
+            danhMucAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Xoá danh mục thành công", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Xoá danh mục thất bại", Toast.LENGTH_SHORT).show();
+        }
     }
 }

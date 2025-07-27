@@ -1,5 +1,6 @@
 package ngovanmanh.ph59521.du_an_mau.Screen;
 
+
 import static android.view.View.GONE;
 
 import android.content.Intent;
